@@ -1,12 +1,12 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import router from "@/api/index.js";
+import router from "./api/index.js";
 
-const app: Express = express();
 const port = 3001;
+const app: Express = express();
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, this is Express + TypeScript by Samir");
+  res.send("Hello World!");
 });
 
 app.use(cors());
@@ -20,4 +20,4 @@ app.listen(port, () => {
   console.log(`[Server]: I am running at https://localhost:${port}`);
 });
 
-export default { app };
+export default app;

@@ -1,6 +1,5 @@
 import express from "express";
-import { default as books } from "../services/books.js";
-import { Book } from "../types.js";
+import books from "../services/books.js";
 
 // Create router
 const router = express.Router();

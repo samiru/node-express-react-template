@@ -1,5 +1,5 @@
 import db from "../database/db.js";
-import { Book } from "../types.js";
+import { Book } from "../types";
 
 export default {
   async getAll() {
@@ -7,7 +7,7 @@ export default {
   },
   async get(id: number) {
     //    return db.get("books").find({ id }).value();
-    return db.data?.books.find((book) => book.id === id);
+    return db.data?.books.find((book: Book) => book.id === id);
   },
   async create(book: Book) {
     //    db.get("books").push(book).write();
