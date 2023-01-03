@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import router from "./api/index.js";
+import router from "./api/index";
 
 const port = 3001;
 const app: Express = express();

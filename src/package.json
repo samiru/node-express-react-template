@@ -34,20 +34,5 @@
     "nodemon": "^2.0.20",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/",
-      "/tests/",
-      "/client/"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/",
-      "/client/"
-    ]
   }
 }
