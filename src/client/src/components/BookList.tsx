@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getBooks } from '../services/books';
 import { Book } from '../types';
 
@@ -8,17 +8,22 @@ function BookList() {
   useEffect(() => {
     async function fetchData() {
       const data = await getBooks();
-      setBooks(data);
+      if (data.length > 0) {
+        setBooks(data);
+      }
     }
     fetchData();
   }, []);
 
   return (
-    <ul>
-      {books.map((book) => (
-        <li key={book.id}>{book.title}</li>
-      ))}
-    </ul>
+    <>
+      <h1>Books</h1>
+      <ul>
+        {books.map((book) => (
+          <li key={book.id}>{book.title}</li>
+        ))}
+      </ul>
+    </>
   );
 };
 

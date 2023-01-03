@@ -1,0 +1,39 @@
+{ 
+  "books": [
+    {
+      "id": 1,
+      "author": "Chinua Achebe",
+      "title": "Things Fall Apart",
+      "description": "The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
+      "notes": "This is a note"
+    },
+    {
+      "id": 2,
+      "author": "Hans Christian Andersen",
+      "title": "Fairy tales",
+      "description":"The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "author": "Dante Alighieri",
+      "title": "The Divine Comedy",
+      "description":"The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "author": "Unknown",
+      "title": "The Epic Of Gilgamesh",
+      "description": "The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "author": "Unknown",
+      "title": "The Book Of Job",
+      "description": "",
+      "notes": ""
+    }
+  ]
+}

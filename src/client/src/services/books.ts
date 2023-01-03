@@ -1,8 +1,9 @@
 import axios from "axios";
+import { Book } from "../types";
 
 const baseURL = process.env.API_BASE_URL || "http://localhost:3001";
 
-export async function getBooks() {
+export async function getBooks(): Promise<Book[]> {
   try {
     const response = await axios.get(`${baseURL}/api/books`);
     return response.data;

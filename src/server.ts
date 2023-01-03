@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import api from "./api";
+import router from "./api/index.js";
 
 const app: Express = express();
 const port = 3001;
@@ -10,7 +10,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(cors());
-app.use("/api", api);
+app.use("/api", router);
 
 // Use error handler middleware
 //app.use(errorHandler);
