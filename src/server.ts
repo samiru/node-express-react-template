@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import router from "./api/index.js";
+import router from "@/api/index.js";
 
 const app: Express = express();
 const port = 3001;
@@ -19,3 +19,5 @@ app.use("/api", router);
 app.listen(port, () => {
   console.log(`[Server]: I am running at https://localhost:${port}`);
 });
+
+export default { app };
