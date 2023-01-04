@@ -15,9 +15,11 @@ app.use("/api", router);
 // Use error handler middleware
 //app.use(errorHandler);
 
-// Start server
-app.listen(port, () => {
-  console.log(`[Server]: I am running at https://localhost:${port}`);
-});
+// Start server (only if not testing)
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`[Server]: I am running at https://localhost:${port}`);
+  });
+}
 
 export default app;

@@ -10,8 +10,9 @@ router.get("/", async (req, res) => {
 });
 
 // GET /api/books/:id - Get book
-router.get("/:id", (req, res) => {
-  res.send(`Get book with id ${req.params.id}`);
+router.get("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  res.send(await books.get(id));
 });
 
 // POST /api/books - Create book
@@ -26,6 +27,7 @@ router.put("/:id", (req, res) => {
 
 // DELETE /api/books/:id - Delete book
 router.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
   res.send(`Delete book with id ${req.params.id}`);
 });
 

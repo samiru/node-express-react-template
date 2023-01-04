@@ -4,7 +4,7 @@ import books from "./books";
 // Create router
 const router = express.Router();
 
-// Use book and author routers for /books and /authors routes
+// Use book router for /books route
 router.use("/books", books);
 
 // Export router

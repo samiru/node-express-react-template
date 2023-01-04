@@ -13,13 +13,11 @@ const connect = () => {
   const file = join(__dirname, "db.json");
   const db = lowdb(new FileSync<Schema>(file));
 
-  console.log({ __dirname, file });
-
   // Read data from JSON file, this will set db.data content
   db.read();
 
   // Set some defaults (required if your JSON file is empty)
-  //db.defaults({ books: [] }).write();
+  db.defaults({ books: [] }).write();
 
   return db;
 };

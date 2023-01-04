@@ -9,8 +9,5 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/dist/"
-    ],
-    "transform": {
-        "^(.+)\\.ts$": "$1.js"
-    }
+    ]
 }
