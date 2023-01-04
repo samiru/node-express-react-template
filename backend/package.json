@@ -11,7 +11,7 @@
     "build": "npx tsc",
     "start": "node dist/server.js",
     "start-dev": "npx nodemon --ignore db.json --exec ts-node src/server.ts",
-    "test": "cross-env NODE_ENV=test jest --coverage --testTimeout=10000 --detectOpenHandles"
+    "test": "cross-env NODE_ENV=test jest --coverage --testTimeout=10000"
   },
   "author": "",
   "license": "ISC",

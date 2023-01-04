@@ -16,8 +16,9 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST /api/books - Create book
-router.post("/", (req, res) => {
-  res.send("Create book");
+router.post("/", async (req, res) => {
+  const book = await books.create(req.body);
+  res.status(201).send(book);
 });
 
 // PUT /api/books/:id - Update book
