@@ -4,15 +4,13 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/dist/",
-      "/tests/",
-      "/client/"
+      "/tests/"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/dist/",
-      "/client/"
+      "/dist/"
     ],
     "transform": {
-        "^.+\\.tsx?$": "ts-jest"
+        "^(.+)\\.ts$": "$1.js"
     }
 }

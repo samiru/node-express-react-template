@@ -1,5 +1,5 @@
 import db from "../database/db";
-import { Book } from "../types";
+import { Book } from "../utils/types";
 
 export default {
   async getAll() {
