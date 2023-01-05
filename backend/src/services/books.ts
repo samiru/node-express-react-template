@@ -17,9 +17,11 @@ export default {
 
     return book;
   },
-  async update(id: number, book: Book) {
-    db.get("books").find({ id }).assign(book);
-    return book;
+  async update(id: number, update: Partial<Book>) {
+    db.get("books").find({ id }).assign(update).write();
+    const updated = db.get("books").find({ id }).value();
+
+    return updated;
   },
   async delete(id: number) {
     db.get("books").remove({ id });

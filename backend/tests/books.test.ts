@@ -61,36 +61,46 @@ describe("Create book", () => {
   it("should create book", async () => {
     // Create the book
     const createResponse = await request.post("/api/books").send(book);
-    expect(createResponse.status).toEqual(201); // Assert that the book was created successfully
+    expect(createResponse.status).toEqual(201);
 
     // Retrieve the book by ID
     const bookId = createResponse.body.id;
     const getResponse = await request.get(`/api/books/${bookId}`).send();
-    expect(getResponse.status).toEqual(200); // Assert that the book was retrieved successfully
+    expect(getResponse.status).toEqual(200);
 
     // Compare the book data
-    expect(getResponse.body).toEqual(Object.assign(book, { id: bookId })); // Assert that the book data is correct
+    expect(getResponse.body).toEqual(Object.assign(book, { id: bookId }));
   });
 });
 
 describe("Update book", () => {
   const id = books[0].id;
-  const book = {
+  const update = {
     title: "Test book", // This is the only field that will be updated
   };
   it("should be succesfull request", async () => {
     await request
       .put(`/api/books/${id}`)
-      .send(book)
+      .send(update)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200);
   });
   it("should update book", async () => {
-    const response = await request.put(`/api/books/${id}`).send(book);
-    expect(response.body.title).toEqual(book.title);
+    // Update the book
+    const updateResponse = await request.put(`/api/books/${id}`).send(update);
+    expect(updateResponse.status).toEqual(200);
+
+    // Retrieve the book by ID
+    const getResponse = await request.get(`/api/books/${id}`).send();
+    expect(getResponse.status).toEqual(200);
+
+    // Compare the book data
+    expect(getResponse.body).toEqual(Object.assign(books[0], update));
   });
 });
+
+// TODO: delete book test
 
 // error handling middleware
 // delete test
