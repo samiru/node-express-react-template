@@ -2,7 +2,6 @@ import supertest from "supertest";
 import app from "../src/server";
 import fs from "node:fs";
 import { join } from "node:path";
-import { v4 as uuidv4 } from "uuid";
 
 import { Book, NewBook } from "../src/utils/types";
 import { createBook, deleteBook } from "./utils";
@@ -72,17 +71,29 @@ describe("Create book", () => {
 
     // Compare the book data
     expect(getResponse.body).toEqual(Object.assign(book, { id: bookId }));
+
+    // Delete the book
+    await deleteBook(bookId);
   });
 });
 
 describe("Update book", () => {
-  const id = books[0].id;
+  let book: Book;
+
+  beforeEach(async () => {
+    book = await createBook();
+  });
+
+  afterEach(async () => {
+    await deleteBook(book.id);
+  });
+
   const update = {
-    title: "Test book", // This is the only field that will be updated
+    title: "Test book update", // This is the only field that will be updated
   };
   it("should be succesfull request", async () => {
     await request
-      .put(`/api/books/${id}`)
+      .put(`/api/books/${book.id}`)
       .send(update)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
@@ -90,15 +101,17 @@ describe("Update book", () => {
   });
   it("should update book", async () => {
     // Update the book
-    const updateResponse = await request.put(`/api/books/${id}`).send(update);
+    const updateResponse = await request
+      .put(`/api/books/${book.id}`)
+      .send(update);
     expect(updateResponse.status).toEqual(200);
 
     // Retrieve the book by ID
-    const getResponse = await request.get(`/api/books/${id}`).send();
+    const getResponse = await request.get(`/api/books/${book.id}`).send();
     expect(getResponse.status).toEqual(200);
 
     // Compare the book data
-    expect(getResponse.body).toEqual(Object.assign(books[0], update));
+    expect(getResponse.body).toEqual(Object.assign(book, update));
   });
 });
 
@@ -123,7 +136,5 @@ describe("Delete book", () => {
     expect(getResponse.status).toEqual(404);
   });
 });
-
-// TODO: Proper setup and teardown for tests
 
 // TODO: Test error handling middleware
