@@ -11,7 +11,12 @@ router.get("/", async (req, res) => {
 
 // GET /api/books/:id - Get book
 router.get("/:id", async (req, res) => {
-  res.send(await books.get(req.params.id));
+  const book = await books.get(req.params.id);
+  if (!book) {
+    return res.status(404).send({ error: "Book not found" });
+  }
+
+  res.send(book);
 });
 
 // POST /api/books - Create book

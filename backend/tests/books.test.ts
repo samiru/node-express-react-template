@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { v4 as uuidv4 } from "uuid";
 
 import { Book, NewBook } from "../src/utils/types";
+import { createBook, deleteBook } from "./utils";
 
 const request = supertest(app);
 
@@ -102,7 +103,13 @@ describe("Update book", () => {
 });
 
 describe("Delete book", () => {
-  const id = uuidv4(); //books[0].id;
+  let id: string;
+
+  beforeEach(async () => {
+    const book = await createBook();
+    id = book.id;
+  });
+
   it("should be succesfull request", async () => {
     await request.delete(`/api/books/${id}`).expect(200);
   });
