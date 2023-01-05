@@ -1,5 +1,6 @@
 import connect from "../database";
 import { Book } from "../utils/types";
+import { v4 as uuidv4 } from "uuid";
 
 const db = connect();
 
@@ -7,23 +8,29 @@ export default {
   async getAll() {
     return db.get("books").value();
   },
-  async get(id: number) {
+  async get(id: string) {
     return db.get("books").find({ id }).value();
   },
   async create(book: Book) {
-    const books = db.get("books");
-    book.id = books.size().value() + 1;
-    books.push(book).write();
+    book.id = uuidv4();
+    db.get("books").push(book).write();
 
     return book;
   },
-  async update(id: number, update: Partial<Book>) {
+  async update(id: string, update: Partial<Book>) {
     db.get("books").find({ id }).assign(update).write();
     const updated = db.get("books").find({ id }).value();
 
     return updated;
   },
-  async delete(id: number) {
-    db.get("books").remove({ id });
+  async delete(id: string) {
+    const deleted = db.get("books").remove({ id }).value();
+    if (deleted.length === 0) {
+      return false;
+    }
+
+    db.write();
+
+    return true;
   },
 };

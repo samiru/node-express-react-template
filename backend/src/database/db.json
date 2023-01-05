@@ -1,184 +1,144 @@
 {
   "books": [
     {
-      "id": 1,
-      "author": "Chinua Achebe",
-      "title": "Test book",
-      "description": "The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
-      "notes": "This is a note"
-    },
-    {
-      "id": 2,
-      "author": "Hans Christian Andersen",
-      "title": "Fairy tales",
-      "description": "The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
-      "notes": ""
-    },
-    {
-      "id": 3,
-      "author": "Dante Alighieri",
-      "title": "The Divine Comedy",
-      "description": "The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
-      "notes": ""
-    },
-    {
-      "id": 4,
-      "author": "Unknown",
-      "title": "The Epic Of Gilgamesh",
-      "description": "The first novel by Nigerian author Chinua Achebe, published in 1958. It is the most widely read book in modern African literature. The story chronicles pre-colonial life in the south-eastern part of Nigeria and the arrival of the Europeans during the late 19th century.",
-      "notes": ""
-    },
-    {
-      "id": 5,
-      "author": "Unknown",
-      "title": "The Book Of Job",
-      "description": "",
-      "notes": ""
-    },
-    {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
-      "notes": "Test notes"
-    },
-    {
-      "title": "Test book",
-      "author": "Test author",
-      "description": "Test description",
-      "notes": "Test notes"
+      "notes": "Test notes",
+      "id": "796fa283-9344-4334-9dc4-5ad947f6b60b"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 8
+      "id": "257ea935-758f-4f50-9e40-ddd5aee3e912"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 9
+      "id": "c38fa816-b243-4200-9eeb-00e5cfc17db2"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 10
+      "id": "1ceb505b-c82f-4180-b415-8ea052e41424"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 11
+      "id": "3aeb4e6e-5b7a-432a-87c6-22e46cb001b2"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 12
+      "id": "af8ec884-1616-46f3-b66e-3a23e34e6ee1"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 13
+      "id": "2249adba-8473-4e06-8b9d-49fec824cd27"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 14
+      "id": "69fe1d15-1e16-4470-aba0-40a53c77ded7"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 15
+      "id": "aaa006b4-fb4f-453a-81bb-141b873625f3"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 16
+      "id": "50d801dd-5f59-4240-b160-af6c3c71c258"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 17
+      "id": "5cf53c61-0d28-46c6-954b-de4e3745d613"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 18
+      "id": "f9e964f4-db69-444f-8ae0-8af6b09919fa"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 19
+      "id": "3fe17341-f090-45bc-b1fb-8fdc81f0c053"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 20
+      "id": "3cfba89d-e8f6-42b4-be40-d9f2290b7f52"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 21
+      "id": "5c148427-9c71-4909-bf5e-c5e29db4d044"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 22
+      "id": "f04c6747-087d-4bf8-853e-658e28d25117"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 23
+      "id": "09c9f4f8-94d6-4903-b13a-2a0e52065f30"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 24
+      "id": "804cba17-36a9-44d1-af8c-c7b954def881"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 25
+      "id": "b2574697-5a4e-4c71-abd2-00a8f2f2f528"
     },
     {
       "title": "Test book",
       "author": "Test author",
       "description": "Test description",
       "notes": "Test notes",
-      "id": 26
+      "id": "31b195d9-2740-4fca-bc32-8f69dd7d5f6e"
     }
   ]
 }

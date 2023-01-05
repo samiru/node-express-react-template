@@ -11,8 +11,7 @@ router.get("/", async (req, res) => {
 
 // GET /api/books/:id - Get book
 router.get("/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  res.send(await books.get(id));
+  res.send(await books.get(req.params.id));
 });
 
 // POST /api/books - Create book
@@ -23,15 +22,22 @@ router.post("/", async (req, res) => {
 
 // PUT /api/books/:id - Update book
 router.put("/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  const book = await books.update(id, req.body);
+  const book = await books.update(req.params.id, req.body);
+  if (!book) {
+    return res.status(404).send({ error: "Book not found" });
+  }
+
   res.send(book);
 });
 
 // DELETE /api/books/:id - Delete book
-router.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  res.send(`Delete book with id ${req.params.id}`);
+router.delete("/:id", async (req, res) => {
+  const deleted = await books.delete(req.params.id);
+  if (!deleted) {
+    return res.status(404).send({ error: "Book not found" });
+  }
+
+  res.send();
 });
 
 // Export router

@@ -2,6 +2,7 @@ import supertest from "supertest";
 import app from "../src/server";
 import fs from "node:fs";
 import { join } from "node:path";
+import { v4 as uuidv4 } from "uuid";
 
 import { Book, NewBook } from "../src/utils/types";
 
@@ -27,7 +28,7 @@ describe("Get all books", () => {
   });
 });
 
-describe("Get book by id", () => {
+describe("Get book", () => {
   const id = books[0].id;
 
   it("should be succesfull request", async () => {
@@ -100,8 +101,22 @@ describe("Update book", () => {
   });
 });
 
-// TODO: delete book test
+describe("Delete book", () => {
+  const id = uuidv4(); //books[0].id;
+  it("should be succesfull request", async () => {
+    await request.delete(`/api/books/${id}`).expect(200);
+  });
+  it("should delete book", async () => {
+    // Delete the book
+    const deleteResponse = await request.delete(`/api/books/${id}`).send();
+    expect(deleteResponse.status).toEqual(200);
 
-// error handling middleware
-// delete test
-// confirm delete, create, update
+    // Retrieve the book by ID
+    const getResponse = await request.get(`/api/books/${id}`).send();
+    expect(getResponse.status).toEqual(404);
+  });
+});
+
+// TODO: Proper setup and teardown for tests
+
+// TODO: Test error handling middleware
