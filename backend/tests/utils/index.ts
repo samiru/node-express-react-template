@@ -20,12 +20,13 @@ const createBook = async (book?: NewBook): Promise<Book> => {
 
 const deleteBook = async (id: string): Promise<boolean> => {
   const db = connect();
+
   const deleted = db.get("books").remove({ id }).value();
   if (deleted.length === 0) {
     return false;
   }
 
-  await db.write();
+  db.write();
 
   return true;
 };

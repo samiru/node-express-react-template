@@ -52,12 +52,17 @@ describe("Create book", () => {
     notes: "Test notes",
   };
   it("should be succesfull request", async () => {
-    await request
+    const {
+      body: { id },
+    } = await request
       .post("/api/books")
       .send(book)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(201);
+
+    // Delete the book
+    await deleteBook(id);
   });
   it("should create book", async () => {
     // Create the book
