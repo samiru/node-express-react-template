@@ -22,8 +22,10 @@ router.post("/", async (req, res) => {
 });
 
 // PUT /api/books/:id - Update book
-router.put("/:id", (req, res) => {
-  res.send(`Update book with id ${req.params.id}`);
+router.put("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  const book = await books.update(id, req.body);
+  res.send(book);
 });
 
 // DELETE /api/books/:id - Delete book

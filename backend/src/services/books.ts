@@ -11,8 +11,10 @@ export default {
     return db.get("books").find({ id }).value();
   },
   async create(book: Book) {
-    db.get("books").push(book);
-    db.write();
+    const books = db.get("books");
+    book.id = books.size().value() + 1;
+    books.push(book).write();
+
     return book;
   },
   async update(id: number, book: Book) {

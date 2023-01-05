@@ -3,11 +3,11 @@ import app from "../src/server";
 import fs from "node:fs";
 import { join } from "node:path";
 
-import { Book } from "../src/utils/types";
+import { Book, NewBook } from "../src/utils/types";
 
 const request = supertest(app);
 
-// Read data from JSON file (db.json contains the same data as db.ts)
+// Read data from JSON file
 const file = join(__dirname, "../src/database/db.json");
 const { books } = JSON.parse(fs.readFileSync(file, "utf8")) as {
   books: Book[];
@@ -44,21 +44,54 @@ describe("Get book by id", () => {
 });
 
 describe("Create book", () => {
-  const book = {
+  const book: NewBook = {
     title: "Test book",
     author: "Test author",
     description: "Test description",
     notes: "Test notes",
   };
   it("should be succesfull request", async () => {
-    const response = await request.post("/api/books").send(book);
-    //      .set("Accept", "application/json");
-    //      .expect("Content-Type", /json/)
-    //      .expect(200);
-    expect(response.status).toEqual(201);
+    await request
+      .post("/api/books")
+      .send(book)
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(201);
   });
   it("should create book", async () => {
-    const response = await request.post("/api/books").send(book);
+    // Create the book
+    const createResponse = await request.post("/api/books").send(book);
+    expect(createResponse.status).toEqual(201); // Assert that the book was created successfully
+
+    // Retrieve the book by ID
+    const bookId = createResponse.body.id;
+    const getResponse = await request.get(`/api/books/${bookId}`).send();
+    expect(getResponse.status).toEqual(200); // Assert that the book was retrieved successfully
+
+    // Compare the book data
+    expect(getResponse.body).toEqual(Object.assign(book, { id: bookId })); // Assert that the book data is correct
+  });
+});
+
+describe("Update book", () => {
+  const id = books[0].id;
+  const book = {
+    title: "Test book", // This is the only field that will be updated
+  };
+  it("should be succesfull request", async () => {
+    await request
+      .put(`/api/books/${id}`)
+      .send(book)
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200);
+  });
+  it("should update book", async () => {
+    const response = await request.put(`/api/books/${id}`).send(book);
     expect(response.body.title).toEqual(book.title);
   });
 });
+
+// error handling middleware
+// delete test
+// confirm delete, create, update
