@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import router from "./api/index";
 import logger from "./middlewares/logger";
+import errorHandler from "./middlewares/errorHandler";
 
 const port = 3001;
 const app: Express = express();
@@ -18,11 +19,11 @@ app.use(express.json());
 // Logging middleware
 app.use(logger);
 
-// Use router for /api route
-app.use("/api", router);
-
 // Error handling middleware
-// app.use(errorHandler);
+app.use(errorHandler);
+
+// Define API routes
+app.use("/api", router);
 
 // Start server (only if not testing!)
 if (process.env.NODE_ENV !== "test") {
