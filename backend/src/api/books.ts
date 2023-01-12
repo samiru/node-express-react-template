@@ -37,7 +37,7 @@ router.put("/:id", async (req, res) => {
 
 // DELETE /api/books/:id - Delete book
 router.delete("/:id", async (req, res) => {
-  const deleted = await books.delete(req.params.id);
+  const deleted = await books.remove(req.params.id);
   if (!deleted) {
     return res.status(404).send({ error: "Book not found" });
   }
