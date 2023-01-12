@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import BookComponent from './components/BookComponent';
-import BookListComponent from './components/BookListComponent';
+import BookForm from './components/BookForm';
+import BookList from './components/BookList';
 import { getBooks } from './services/books';
 import { Book } from './types';
 
@@ -21,8 +21,8 @@ function App() {
   return (
     <div className="App">
       <h1>Books</h1>
-      <BookListComponent books={books}/>
-      <BookComponent />
+      <BookList books={books}/>
+      <BookForm />
     </div>
   );
 }
