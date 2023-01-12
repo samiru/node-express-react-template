@@ -6,6 +6,8 @@ const port = 3001;
 const app: Express = express();
 
 app.use(cors());
+app.options("*", cors());
+
 app.use(express.json());
 
 app.use("/api", router);
