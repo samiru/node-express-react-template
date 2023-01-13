@@ -1,7 +1,7 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import cors from "cors";
 import router from "./api/index";
-import logger from "./middlewares/logger";
+import requestLogger from "./middlewares/requestLogger";
 import errorHandler from "./middlewares/errorHandler";
 
 const port = 3001;
@@ -16,8 +16,8 @@ app.options("*", cors());
 // Parse incoming JSON into request body
 app.use(express.json());
 
-// Logging middleware
-app.use(logger);
+// Request logging middleware
+app.use(requestLogger);
 
 // Error handling middleware
 app.use(errorHandler);
