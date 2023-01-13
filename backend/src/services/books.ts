@@ -1,5 +1,5 @@
 import connect from "../database";
-import { Book } from "../utils/types";
+import { BaseError, Book } from "../utils/types";
 import { v4 as uuidv4 } from "uuid";
 
 const db = connect();
