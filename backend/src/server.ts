@@ -3,6 +3,7 @@ import cors from "cors";
 import router from "./api/index";
 import requestLogger from "./middlewares/requestLogger";
 import { logError, returnError } from "./middlewares/errorHandler";
+import requestTime from "./middlewares/requestTime";
 
 const port = 3001;
 const app: Express = express();
@@ -16,7 +17,10 @@ app.options("*", cors());
 // Parse incoming JSON into request body
 app.use(express.json());
 
-// Request logging middleware
+// Add request time to request headers
+app.use(requestTime);
+
+// Log requests
 app.use(requestLogger);
 
 // Define API routes
@@ -25,7 +29,7 @@ app.use("/api", router);
 // Log errors
 app.use(logError);
 
-// Return error
+// Return error to client
 app.use(returnError);
 
 // Start server (only if not testing!)

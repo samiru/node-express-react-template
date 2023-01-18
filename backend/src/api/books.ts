@@ -1,13 +1,15 @@
 import express, { NextFunction, Request, Response } from "express";
 import books from "../services/books";
 import logger from "../utils/logger";
-import { BaseError, HTTPStatus } from "../utils/types";
+import { HTTPError, HTTPStatus } from "../utils/types";
 
 const router = express.Router();
 
 // GET /api/books - List books
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log(req.headers["requestDate"]);
+
     const items = await books.getAll();
     res.send(items);
   } catch (error) {
@@ -21,7 +23,7 @@ router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const book = await books.get(req.params.id);
     if (!book) {
       logger.warn(`Book with id ${req.params.id} not found`);
-      throw new BaseError("Book not found", HTTPStatus.NOT_FOUND);
+      throw new HTTPError("Book not found", HTTPStatus.NOT_FOUND);
     }
 
     res.send(book);
@@ -46,7 +48,7 @@ router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const book = await books.update(req.params.id, req.body);
     if (!book) {
       logger.warn(`Book with id ${req.params.id} not found`);
-      throw new BaseError("Book not found", HTTPStatus.NOT_FOUND);
+      throw new HTTPError("Book not found", HTTPStatus.NOT_FOUND);
     }
 
     res.send(book);
@@ -63,7 +65,7 @@ router.delete(
       const deleted = await books.remove(req.params.id);
       if (!deleted) {
         logger.warn(`Book with id ${req.params.id} not found`);
-        throw new BaseError("Book not found", HTTPStatus.NOT_FOUND);
+        throw new HTTPError("Book not found", HTTPStatus.NOT_FOUND);
       }
 
       res.send();

@@ -3,7 +3,7 @@ import app from "../src/server";
 import fs from "node:fs";
 import { join } from "node:path";
 
-import { Book, NewBook } from "../src/utils/types";
+import { Book, HTTPStatus, NewBook } from "../src/utils/types";
 import { createBook, deleteBook } from "./utils";
 
 const request = supertest(app);
@@ -15,12 +15,12 @@ const { books } = JSON.parse(fs.readFileSync(file, "utf8")) as {
 };
 
 describe("Get all books", () => {
-  it("should be succesfull request", async () => {
+  it("should be succesful request", async () => {
     await request
       .get("/api/books")
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
-      .expect(200);
+      .expect(HTTPStatus.OK);
   });
   it("should get all books", async () => {
     const response = await request.get("/api/books");
@@ -31,12 +31,12 @@ describe("Get all books", () => {
 describe("Get book", () => {
   const id = books[0].id;
 
-  it("should be succesfull request", async () => {
+  it("should be succesful request", async () => {
     await request
       .get(`/api/books/${id}`)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
-      .expect(200);
+      .expect(HTTPStatus.OK);
   });
   it("should get book by id", async () => {
     const response = await request.get(`/api/books/${id}`);
@@ -51,7 +51,7 @@ describe("Create book", () => {
     description: "Test description",
     notes: "Test notes",
   };
-  it("should be succesfull request", async () => {
+  it("should be succesful request", async () => {
     const {
       body: { id },
     } = await request
@@ -59,7 +59,7 @@ describe("Create book", () => {
       .send(book)
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
-      .expect(201);
+      .expect(HTTPStatus.CREATED);
 
     // Delete the book
     await deleteBook(id);
@@ -67,12 +67,12 @@ describe("Create book", () => {
   it("should create book", async () => {
     // Create the book
     const createResponse = await request.post("/api/books").send(book);
-    expect(createResponse.status).toEqual(201);
+    expect(createResponse.status).toEqual(HTTPStatus.CREATED);
 
     // Retrieve the book by ID
     const bookId = createResponse.body.id;
     const getResponse = await request.get(`/api/books/${bookId}`).send();
-    expect(getResponse.status).toEqual(200);
+    expect(getResponse.status).toEqual(HTTPStatus.OK);
 
     // Compare the book data
     expect(getResponse.body).toEqual(Object.assign(book, { id: bookId }));
@@ -96,7 +96,7 @@ describe("Update book", () => {
   const update = {
     title: "Test book update", // This is the only field that will be updated
   };
-  it("should be succesfull request", async () => {
+  it("should be succesful request", async () => {
     await request
       .put(`/api/books/${book.id}`)
       .send(update)
@@ -109,11 +109,11 @@ describe("Update book", () => {
     const updateResponse = await request
       .put(`/api/books/${book.id}`)
       .send(update);
-    expect(updateResponse.status).toEqual(200);
+    expect(updateResponse.status).toEqual(HTTPStatus.OK);
 
     // Retrieve the book by ID
     const getResponse = await request.get(`/api/books/${book.id}`).send();
-    expect(getResponse.status).toEqual(200);
+    expect(getResponse.status).toEqual(HTTPStatus.OK);
 
     // Compare the book data
     expect(getResponse.body).toEqual(Object.assign(book, update));
@@ -128,17 +128,17 @@ describe("Delete book", () => {
     id = book.id;
   });
 
-  it("should be succesfull request", async () => {
-    await request.delete(`/api/books/${id}`).expect(200);
+  it("should be succesful request", async () => {
+    await request.delete(`/api/books/${id}`).expect(HTTPStatus.OK);
   });
   it("should delete book", async () => {
     // Delete the book
     const deleteResponse = await request.delete(`/api/books/${id}`).send();
-    expect(deleteResponse.status).toEqual(200);
+    expect(deleteResponse.status).toEqual(HTTPStatus.OK);
 
     // Retrieve the book by ID
     const getResponse = await request.get(`/api/books/${id}`).send();
-    expect(getResponse.status).toEqual(404);
+    expect(getResponse.status).toEqual(HTTPStatus.NOT_FOUND);
   });
 });
 

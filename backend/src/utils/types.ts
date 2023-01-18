@@ -9,7 +9,7 @@ export enum HTTPStatus {
   INTERNAL_SERVER_ERROR = 500,
 }
 
-export class BaseError extends Error {
+export class HTTPError extends Error {
   status?: HTTPStatus;
 
   constructor(message: string, status?: HTTPStatus) {
