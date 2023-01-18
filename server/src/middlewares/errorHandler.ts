@@ -1,5 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-import logger from "../utils/logger";
+import { logger } from "../utils/logger";
 import { HTTPError, HTTPStatus } from "../utils/types";
 
 const logError: ErrorRequestHandler = (

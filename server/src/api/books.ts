@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import books from "../services/books";
-import logger from "../utils/logger";
+import { logger } from "../utils/logger";
 import { HTTPError, HTTPStatus } from "../utils/types";
 
 const router = express.Router();

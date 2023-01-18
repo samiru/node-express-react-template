@@ -6,6 +6,7 @@ import { logError, returnError } from "./middlewares/errorHandler";
 import requestTime from "./middlewares/requestTime";
 import httpContext from "express-http-context";
 import requestId from "./middlewares/requestId";
+import { contextLoggerMiddleware } from "./utils/logger";
 
 const port = 3001;
 const app: Express = express();
@@ -24,6 +25,9 @@ app.use(httpContext.middleware);
 
 // Add request id to request headers and context
 app.use(requestId);
+
+// Add logger with request id to context
+app.use(contextLoggerMiddleware);
 
 // Add request time to request headers
 app.use(requestTime);
