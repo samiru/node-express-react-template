@@ -18,7 +18,6 @@ const returnError: ErrorRequestHandler = (
   response: Response,
   next: NextFunction
 ) => {
-  console.log(error);
   response
     .status(error.status || HTTPStatus.INTERNAL_SERVER_ERROR)
     .send({ message: error.message });

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import httpcontext from "express-http-context";
 
-const requestDate = (
+const requestTime = (
   request: Request,
   response: Response,
   next: NextFunction
@@ -10,4 +10,4 @@ const requestDate = (
   next();
 };
 
-export default requestDate;
+export default requestTime;
