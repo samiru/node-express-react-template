@@ -6,6 +6,8 @@ const pinoLogger = pino({
   level: process.env.NODE_ENV === "production" ? "info" : "debug",
 });
 
+// Use logger from context if available, otherwise use default logger
+// See https://blog.logrocket.com/logging-with-pino-and-asynclocalstorage-in-node-js/
 const logger = new Proxy(pinoLogger, {
   get(target, property, receiver) {
     target = httpcontext.get("logger") || target;
@@ -13,6 +15,7 @@ const logger = new Proxy(pinoLogger, {
   },
 });
 
+// Add logger with request id to context
 const contextLoggerMiddleware = (
   request: Request,
   response: Response,
