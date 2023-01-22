@@ -25,7 +25,7 @@ const getBook = async (id: string): Promise<Book> => {
 
 const addBook = async (book: Book): Promise<Book> => {
   try {
-    const response = await axios.post(`${baseURL}/api/book`, book);
+    const response = await axios.post(`${baseURL}/api/books`, book);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -35,7 +35,7 @@ const addBook = async (book: Book): Promise<Book> => {
 
 const updateBook = async (book: Book): Promise<Book> => {
   try {
-    const response = await axios.put(`${baseURL}/api/book/${book.id}`, book);
+    const response = await axios.put(`${baseURL}/api/books/${book.id}`, book);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -45,7 +45,7 @@ const updateBook = async (book: Book): Promise<Book> => {
 
 const deleteBook = async (id: string): Promise<Book> => {
   try {
-    const response = await axios.delete(`${baseURL}/api/book/${id}`);
+    const response = await axios.delete(`${baseURL}/api/books/${id}`);
     return response.data;
   } catch (error) {
     console.error(error);

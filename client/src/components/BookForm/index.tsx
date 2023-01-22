@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  useForm,
-  Resolver,
-  SubmitHandler,
-  useController,
-} from "react-hook-form";
+import { useEffect } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Book } from "../../types";
 import { addBook, updateBook, deleteBook } from "../../services/books";
 import "./style.css";
@@ -14,59 +9,72 @@ interface BookFormProps {
   setBook: (book: Book) => void;
 }
 
-//const didUpdate = () => {
-//  console.log("BookForm did update");
-//};
-
 const BookForm = (props: BookFormProps) => {
-  //const [book, setBook] = useState<Book>();
-  const { book, setBook } = props;
+  const { book } = props;
 
-  //  useEffect(didUpdate);
+  console.log("BookForm: ", book);
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Book>();
 
-  const onSubmit: SubmitHandler<Book> = (data: Book) => console.log(data);
+  // Populate the form with the book data
+  useEffect(() => {
+    reset({
+      id: book.id,
+      author: book.author,
+      title: book.title,
+      description: book.description,
+    });
+  }, [book, reset]);
 
-  /*
-  const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    const { name, value } = event.target;
-    console.log(name, value);
-    setBook({ ...book, [name]: value });
+  const onSubmit: SubmitHandler<Book> = (data: Book) => {
+    updateBook(data);
   };
-*/
+
+  const onSubmitNew: SubmitHandler<Book> = (data: Book) => {
+    addBook(data);
+  };
+
+  const handleDelete = () => {
+    deleteBook(book.id);
+  };
 
   console.log(errors);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form>
+      <input type="hidden" {...register("id")} />
+
       <label htmlFor="author">Author</label>
       <input
         type="text"
         placeholder="Author"
-        value={book.author}
         {...register("author", { required: true })}
       />
       <label htmlFor="title">Title</label>
       <input
         type="text"
         placeholder="Title"
-        value={book.title}
         {...register("title", { required: true })}
       />
       <label htmlFor="description">Description</label>
       <input
         type="text"
         placeholder="Description"
-        value={book.description}
         {...register("description", { required: true })}
       />
 
-      <input type="submit" />
+      <input type="submit" value="Submit" onClick={handleSubmit(onSubmit)} />
+      <input
+        type="submit"
+        value="Submit New"
+        onClick={handleSubmit(onSubmitNew)}
+      />
+      <input type="button" value="Delete" onClick={handleDelete} />
     </form>
   );
 };

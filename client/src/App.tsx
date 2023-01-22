@@ -8,7 +8,7 @@ import { Book } from "./types";
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
   const [book, setBook] = useState<Book>({
-    id: 0,
+    id: "",
     title: "",
     author: "",
     description: "",
