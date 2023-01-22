@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import {
+  useForm,
+  Resolver,
+  SubmitHandler,
+  useController,
+} from "react-hook-form";
 import { Book } from "../../types";
 import { addBook, updateBook, deleteBook } from "../../services/books";
 import "./style.css";
@@ -18,78 +24,50 @@ const BookForm = (props: BookFormProps) => {
 
   //  useEffect(didUpdate);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log({ event, book });
-    console.log("submit");
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Book>();
 
-  const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log({ event, book });
-    console.log("save");
-  };
+  const onSubmit: SubmitHandler<Book> = (data: Book) => console.log(data);
 
-  const handleSaveNew = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log({ event, book });
-    console.log("save new");
-  };
-
-  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log({ event, book });
-    console.log("delete");
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  /*
+  const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     const { name, value } = event.target;
-    console.log(`name: ${name}, value: ${value}`);
+    console.log(name, value);
     setBook({ ...book, [name]: value });
   };
+*/
+
+  console.log(errors);
 
   return (
-    <>
-      <div className="center">
-        <h1>Book</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Title
-            <input
-              type="text"
-              name="title"
-              value={book.title}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Author
-            <input
-              type="text"
-              name="author"
-              value={book.author}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Description
-            <input
-              type="text"
-              name="description"
-              value={book.description}
-              onChange={handleChange}
-            />
-          </label>
-          <div>
-            <button type="submit">Save New</button>
-            <button type="submit">Save</button>
-            <button type="button" onClick={handleDelete}>
-              Delete
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="author">Author</label>
+      <input
+        type="text"
+        placeholder="Author"
+        value={book.author}
+        {...register("author", { required: true })}
+      />
+      <label htmlFor="title">Title</label>
+      <input
+        type="text"
+        placeholder="Title"
+        value={book.title}
+        {...register("title", { required: true })}
+      />
+      <label htmlFor="description">Description</label>
+      <input
+        type="text"
+        placeholder="Description"
+        value={book.description}
+        {...register("description", { required: true })}
+      />
+
+      <input type="submit" />
+    </form>
   );
 };
 
