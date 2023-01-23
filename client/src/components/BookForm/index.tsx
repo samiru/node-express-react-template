@@ -1,8 +1,15 @@
 import { useEffect } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Book } from "../../types";
 import { addBook, updateBook, deleteBook } from "../../services/books";
+
+import Button from "react-bootstrap/esm/Button";
+import Form from "react-bootstrap/esm/Form";
+import Toast from "react-bootstrap/esm/Toast";
+
 import "./style.css";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 interface BookFormProps {
   book: Book;
@@ -12,12 +19,11 @@ interface BookFormProps {
 const BookForm = (props: BookFormProps) => {
   const { book } = props;
 
-  console.log("BookForm: ", book);
-
   const {
     reset,
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<Book>();
 
@@ -43,39 +49,90 @@ const BookForm = (props: BookFormProps) => {
     deleteBook(book.id);
   };
 
+  const handleReset = () => {
+    reset({
+      id: "",
+      author: "",
+      title: "",
+      description: "",
+    });
+  };
+
   console.log(errors);
 
   return (
-    <form>
-      <input type="hidden" {...register("id")} />
+    <>
+      <Form>
+        <input type="hidden" {...register("id")} />
 
-      <label htmlFor="author">Author</label>
-      <input
-        type="text"
-        placeholder="Author"
-        {...register("author", { required: true })}
-      />
-      <label htmlFor="title">Title</label>
-      <input
-        type="text"
-        placeholder="Title"
-        {...register("title", { required: true })}
-      />
-      <label htmlFor="description">Description</label>
-      <input
-        type="text"
-        placeholder="Description"
-        {...register("description", { required: true })}
-      />
+        <Form.Group as={Row} className="mb-3">
+          <Col md={3}>
+            <Form.Label htmlFor="author">Author</Form.Label>
+          </Col>
+          <Col>
+            <Controller
+              name="author"
+              control={control}
+              defaultValue=""
+              render={({ field }) => <Form.Control {...field} />}
+            />
+          </Col>
+        </Form.Group>
 
-      <input type="submit" value="Submit" onClick={handleSubmit(onSubmit)} />
-      <input
-        type="submit"
-        value="Submit New"
-        onClick={handleSubmit(onSubmitNew)}
-      />
-      <input type="button" value="Delete" onClick={handleDelete} />
-    </form>
+        <Form.Group as={Row} className="mb-3">
+          <Col md={3}>
+            <Form.Label htmlFor="title">Title</Form.Label>
+          </Col>
+          <Col>
+            <Controller
+              name="title"
+              control={control}
+              defaultValue=""
+              render={({ field }) => <Form.Control {...field} />}
+            />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3">
+          <Col md={3}>
+            <Form.Label as={Col} htmlFor="description">
+              Description
+            </Form.Label>
+          </Col>
+          <Col>
+            <Controller
+              name="description"
+              control={control}
+              defaultValue=""
+              render={({ field }) => <Form.Control {...field} />}
+            />
+          </Col>
+        </Form.Group>
+      </Form>
+
+      <div className="d-flex justify-content-end">
+        <Button
+          variant="primary"
+          onClick={handleSubmit(onSubmit)}
+          className="mx-1"
+        >
+          Save
+        </Button>
+        <Button
+          variant="primary"
+          onClick={handleSubmit(onSubmitNew)}
+          className="text-nowrap mx-1"
+        >
+          Save New
+        </Button>
+        <Button variant="danger" onClick={handleDelete} className="mx-1">
+          Delete
+        </Button>
+        <Button variant="secondary" onClick={handleReset} className="mx-1">
+          Clear
+        </Button>
+      </div>
+    </>
   );
 };
 

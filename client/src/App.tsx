@@ -5,6 +5,10 @@ import BookList from "./components/BookList";
 import { getBooks } from "./services/books";
 import { Book } from "./types";
 
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
   const [book, setBook] = useState<Book>({
@@ -30,9 +34,19 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Books</h1>
-      <BookList books={books} selectBook={selectBook} />
-      <BookForm book={book} setBook={setBook} />
+      <Container>
+        <Row>
+          <h1>Books</h1>
+        </Row>
+        <Row>
+          <Col>
+            <BookList books={books} selectBook={selectBook} />
+          </Col>
+          <Col>
+            <BookForm book={book} setBook={setBook} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
