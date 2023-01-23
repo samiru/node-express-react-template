@@ -4,7 +4,14 @@ li {
     padding: 0;
 }
 
+li.selected {
+    background-color: #000;
+    color: #fff;   
+}
+
 .center {
   width: 50%;
   margin: auto;
 }
+
+

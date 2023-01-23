@@ -40,7 +40,7 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <BookList books={books} selectBook={selectBook} />
+            <BookList book={book} books={books} selectBook={selectBook} />
           </Col>
           <Col>
             <BookForm book={book} setBook={setBook} />
