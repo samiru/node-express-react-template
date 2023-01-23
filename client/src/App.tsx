@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import BookForm from "./components/BookForm";
 import BookList from "./components/BookList";
 import { getBooks } from "./services/books";
@@ -9,17 +8,14 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
+import "./App.css";
+
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [book, setBook] = useState<Book>({
-    id: "",
-    title: "",
-    author: "",
-    description: "",
-  });
+  const [selectedBook, setSelectedBook] = useState<Book | undefined>();
 
   const selectBook = (book: Book) => {
-    setBook(book);
+    setSelectedBook(book);
   };
 
   useEffect(() => {
@@ -40,10 +36,14 @@ function App() {
         </Row>
         <Row>
           <Col>
-            <BookList book={book} books={books} selectBook={selectBook} />
+            <BookList
+              selectedBook={selectedBook}
+              books={books}
+              selectBook={selectBook}
+            />
           </Col>
           <Col>
-            <BookForm book={book} setBook={setBook} />
+            <BookForm selectedBook={selectedBook} setBook={setSelectedBook} />
           </Col>
         </Row>
       </Container>

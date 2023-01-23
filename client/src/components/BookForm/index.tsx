@@ -12,12 +12,12 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
 interface BookFormProps {
-  book: Book;
-  setBook: (book: Book) => void;
+  selectedBook?: Book;
+  setBook: (book?: Book) => void;
 }
 
 const BookForm = (props: BookFormProps) => {
-  const { book } = props;
+  const { selectedBook: book, setBook } = props;
 
   const {
     reset,
@@ -29,6 +29,7 @@ const BookForm = (props: BookFormProps) => {
 
   // Populate the form with the book data
   useEffect(() => {
+    if (!book) return;
     reset({
       id: book.id,
       author: book.author,
@@ -39,23 +40,29 @@ const BookForm = (props: BookFormProps) => {
 
   const onSubmit: SubmitHandler<Book> = (data: Book) => {
     updateBook(data);
+    clearForm();
   };
 
   const onSubmitNew: SubmitHandler<Book> = (data: Book) => {
     addBook(data);
+    clearForm();
   };
 
   const handleDelete = () => {
+    if (!book) return;
     deleteBook(book.id);
+    clearForm();
   };
 
-  const handleReset = () => {
+  const clearForm = () => {
     reset({
       id: "",
       author: "",
       title: "",
       description: "",
     });
+
+    setBook(undefined);
   };
 
   console.log(errors);
@@ -128,7 +135,7 @@ const BookForm = (props: BookFormProps) => {
         <Button variant="danger" onClick={handleDelete} className="mx-1">
           Delete
         </Button>
-        <Button variant="secondary" onClick={handleReset} className="mx-1">
+        <Button variant="secondary" onClick={clearForm} className="mx-1">
           Clear
         </Button>
       </div>

@@ -2,13 +2,13 @@ import { Book } from "../../types";
 import "./style.css";
 
 interface BookListProps {
-  book: Book;
+  selectedBook?: Book;
   books: Book[];
   selectBook: (book: Book) => void;
 }
 
 const BookList = (props: BookListProps) => {
-  const { books, selectBook } = props;
+  const { books, selectedBook, selectBook } = props;
 
   return (
     <>
@@ -18,7 +18,9 @@ const BookList = (props: BookListProps) => {
             <li
               key={book.id}
               onClick={() => selectBook(book)}
-              className={book.id === props.book.id ? "selected" : ""}
+              className={
+                selectedBook && book.id === selectedBook.id ? "selected" : ""
+              }
             >
               {book.title}
             </li>
