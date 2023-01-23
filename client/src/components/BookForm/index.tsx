@@ -10,6 +10,7 @@ import Toast from "react-bootstrap/esm/Toast";
 import "./style.css";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import { ErrorMessage } from "@hookform/error-message";
 
 interface BookFormProps {
   selectedBook?: Book;
@@ -65,8 +66,6 @@ const BookForm = (props: BookFormProps) => {
     setBook(undefined);
   };
 
-  console.log(errors);
-
   return (
     <>
       <Form>
@@ -81,8 +80,14 @@ const BookForm = (props: BookFormProps) => {
               name="author"
               control={control}
               defaultValue=""
-              render={({ field }) => <Form.Control {...field} />}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  {...register("author", { required: "Author is required" })}
+                />
+              )}
             />
+            <ErrorMessage errors={errors} name="author" />
           </Col>
         </Form.Group>
 
@@ -95,8 +100,14 @@ const BookForm = (props: BookFormProps) => {
               name="title"
               control={control}
               defaultValue=""
-              render={({ field }) => <Form.Control {...field} />}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  {...register("title", { required: "Book title is required" })}
+                />
+              )}
             />
+            <ErrorMessage errors={errors} name="title" />
           </Col>
         </Form.Group>
 
@@ -111,8 +122,16 @@ const BookForm = (props: BookFormProps) => {
               name="description"
               control={control}
               defaultValue=""
-              render={({ field }) => <Form.Control {...field} />}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  {...register("description", {
+                    required: "Description is required",
+                  })}
+                />
+              )}
             />
+            <ErrorMessage errors={errors} name="description" />
           </Col>
         </Form.Group>
       </Form>
@@ -122,6 +141,7 @@ const BookForm = (props: BookFormProps) => {
           variant="primary"
           onClick={handleSubmit(onSubmit)}
           className="mx-1"
+          disabled={!book}
         >
           Save
         </Button>
@@ -132,7 +152,12 @@ const BookForm = (props: BookFormProps) => {
         >
           Save New
         </Button>
-        <Button variant="danger" onClick={handleDelete} className="mx-1">
+        <Button
+          variant="danger"
+          onClick={handleDelete}
+          className="mx-1"
+          disabled={!book}
+        >
           Delete
         </Button>
         <Button variant="secondary" onClick={clearForm} className="mx-1">
