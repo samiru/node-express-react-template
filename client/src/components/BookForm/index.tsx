@@ -14,11 +14,11 @@ import { ErrorMessage } from "@hookform/error-message";
 
 interface BookFormProps {
   selectedBook?: Book;
-  setBook: (book?: Book) => void;
+  setSelectedBook: (book?: Book) => void;
 }
 
 const BookForm = (props: BookFormProps) => {
-  const { selectedBook: book, setBook } = props;
+  const { selectedBook, setSelectedBook } = props;
 
   const {
     reset,
@@ -30,14 +30,14 @@ const BookForm = (props: BookFormProps) => {
 
   // Populate the form with the book data
   useEffect(() => {
-    if (!book) return;
+    if (!selectedBook) return;
     reset({
-      id: book.id,
-      author: book.author,
-      title: book.title,
-      description: book.description,
+      id: selectedBook.id,
+      author: selectedBook.author,
+      title: selectedBook.title,
+      description: selectedBook.description,
     });
-  }, [book, reset]);
+  }, [selectedBook, reset]);
 
   const onSubmit: SubmitHandler<Book> = (data: Book) => {
     updateBook(data);
@@ -50,8 +50,8 @@ const BookForm = (props: BookFormProps) => {
   };
 
   const handleDelete = () => {
-    if (!book) return;
-    deleteBook(book.id);
+    if (!selectedBook) return;
+    deleteBook(selectedBook.id);
     clearForm();
   };
 
@@ -63,7 +63,7 @@ const BookForm = (props: BookFormProps) => {
       description: "",
     });
 
-    setBook(undefined);
+    setSelectedBook(undefined);
   };
 
   return (
@@ -141,7 +141,7 @@ const BookForm = (props: BookFormProps) => {
           variant="primary"
           onClick={handleSubmit(onSubmit)}
           className="mx-1"
-          disabled={!book}
+          disabled={!selectedBook}
         >
           Save
         </Button>
@@ -156,7 +156,7 @@ const BookForm = (props: BookFormProps) => {
           variant="danger"
           onClick={handleDelete}
           className="mx-1"
-          disabled={!book}
+          disabled={!selectedBook}
         >
           Delete
         </Button>

@@ -8,6 +8,9 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./App.css";
 
 function App() {
@@ -20,16 +23,26 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getBooks();
-      if (data.length > 0) {
-        setBooks(data);
+      try {
+        const data = await getBooks();
+        if (data.length > 0) {
+          setBooks(data);
+        }
+      } catch (error) {
+        const { message } = error as Error;
+        if (message) {
+          toast.error(message);
+        }
+        console.log(error);
       }
     }
+
     fetchData();
-  }, []);
+  }, [selectedBook]);
 
   return (
     <div className="App">
+      <ToastContainer position="top-center" theme="colored" />
       <Container>
         <Row>
           <h1>Books</h1>
@@ -43,7 +56,10 @@ function App() {
             />
           </Col>
           <Col>
-            <BookForm selectedBook={selectedBook} setBook={setSelectedBook} />
+            <BookForm
+              selectedBook={selectedBook}
+              setSelectedBook={setSelectedBook}
+            />
           </Col>
         </Row>
       </Container>

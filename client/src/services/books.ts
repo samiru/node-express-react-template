@@ -8,7 +8,6 @@ const getBooks = async (): Promise<Book[]> => {
     const response = await axios.get(`${baseURL}/api/books`);
     return response.data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -18,7 +17,6 @@ const getBook = async (id: string): Promise<Book> => {
     const response = await axios.get(`${baseURL}/api/book/${id}`);
     return response.data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -28,7 +26,6 @@ const addBook = async (book: Book): Promise<Book> => {
     const response = await axios.post(`${baseURL}/api/books`, book);
     return response.data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
@@ -38,7 +35,6 @@ const updateBook = async (book: Book): Promise<Book> => {
     const response = await axios.put(`${baseURL}/api/books/${book.id}`, book);
     return response.data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
