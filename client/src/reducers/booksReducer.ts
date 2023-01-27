@@ -1,4 +1,10 @@
-import { Book, BooksAction, BooksActionTypes, BooksState } from "../types";
+import {
+  Book,
+  BooksAction,
+  BooksActionTypes,
+  BooksState,
+  ErrorWithRequestId,
+} from "../types";
 
 const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
   switch (action.type) {
@@ -40,7 +46,7 @@ const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
     case BooksActionTypes.SET_ERROR:
       return {
         ...state,
-        error: action.payload as Error,
+        error: action.payload as Error | ErrorWithRequestId,
       };
 
     case BooksActionTypes.SELECT_BOOK:

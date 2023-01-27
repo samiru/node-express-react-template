@@ -11,6 +11,13 @@ import { contextLoggerMiddleware } from "./utils/logger";
 const port = 3001;
 const app: Express = express();
 
+/*
+const corsOptions = {
+  origin: "*",
+  allowHeaders: ["Content-Type", "x-request-id"],
+};
+*/
+
 // Enable CORS
 app.use(cors());
 

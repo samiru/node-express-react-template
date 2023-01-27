@@ -9,7 +9,17 @@ const requestId = (
 ) => {
   const requestId = uuidv4();
 
-  request.headers["X-Request-ID"] = requestId;
+  // Set request id in request headers
+  request.headers["x-request-id"] = requestId;
+
+  // Set CORS headers for allowing request id to be sent
+  response.set("Access-Control-Allow-Headers", "x-request-id");
+  response.set("Access-Control-Expose-Headers", "x-request-id");
+
+  // Set request id in response headers
+  response.set("x-request-id", requestId);
+
+  // Set request id in context
   httpcontext.set("requestId", requestId);
 
   next();

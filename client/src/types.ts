@@ -9,7 +9,7 @@ export interface Book {
 export interface BooksState {
   books: Book[];
   book?: Book;
-  error?: Error;
+  error?: ErrorWithRequestId;
 }
 
 export enum BooksActionTypes {
@@ -22,7 +22,11 @@ export enum BooksActionTypes {
   SET_ERROR = "SET_ERROR",
 }
 
+export interface ErrorWithRequestId extends Error {
+  requestId?: string;
+}
+
 export interface BooksAction {
   type: BooksActionTypes;
-  payload: Book | Book[] | Error;
+  payload: Book | Book[] | Error | ErrorWithRequestId | undefined;
 }

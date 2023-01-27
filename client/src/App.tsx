@@ -35,7 +35,8 @@ function App() {
 
   useEffect(() => {
     if (error) {
-      toast.error(error.message);
+      const { message, requestId } = error;
+      toast.error(`${message} ${requestId ? ` (${requestId})` : ""}`);
     }
   }, [error]);
 

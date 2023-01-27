@@ -22,7 +22,7 @@ const contextLoggerMiddleware = (
   next: NextFunction
 ) => {
   const child = pinoLogger.child({
-    requestId: request.headers["X-Request-ID"],
+    requestId: request.headers["x-request-id"],
   });
   httpcontext.set("logger", child);
 
