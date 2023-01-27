@@ -5,3 +5,24 @@ export interface Book {
   description: string;
   notes?: string;
 }
+
+export interface BooksState {
+  books: Book[];
+  book?: Book;
+  error?: Error;
+}
+
+export enum BooksActionTypes {
+  DESELECT_BOOK = "DESELECT_BOOK",
+  SELECT_BOOK = "SELECT_BOOK",
+  SET_BOOKS = "SET_BOOKS",
+  ADD_BOOK = "ADD_BOOK",
+  UPDATE_BOOK = "UPDATE_BOOK",
+  REMOVE_BOOK = "REMOVE_BOOK",
+  SET_ERROR = "SET_ERROR",
+}
+
+export interface BooksAction {
+  type: BooksActionTypes;
+  payload: Book | Book[] | Error;
+}

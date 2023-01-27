@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import BookForm from "./components/BookForm";
 import BookList from "./components/BookList";
-import { getBooks } from "./services/books";
-import { Book } from "./types";
+import { Book, BooksState } from "./types";
 
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
@@ -12,33 +11,41 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
+import booksReducer from "./reducers/booksReducer";
+import { useBookActions } from "./actions/books";
 
 function App() {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [selectedBook, setSelectedBook] = useState<Book | undefined>();
-
-  const selectBook = (book: Book) => {
-    setSelectedBook(book);
+  const initialState: BooksState = {
+    books: Array<Book>(),
+    book: undefined,
+    error: undefined,
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getBooks();
-        if (data.length > 0) {
-          setBooks(data);
-        }
-      } catch (error) {
-        const { message } = error as Error;
-        if (message) {
-          toast.error(message);
-        }
-        console.log(error);
-      }
-    }
+  const [state, dispatch] = useReducer(booksReducer, initialState);
+  const { books, book, error } = state;
 
+  const {
+    fetchBooks,
+    addBook,
+    updateBook,
+    deleteBook,
+    selectBook,
+    deSelectBook,
+  } = useBookActions(dispatch);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchBooks();
+    };
     fetchData();
-  }, [selectedBook]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [book]);
 
   return (
     <div className="App">
@@ -50,15 +57,18 @@ function App() {
         <Row>
           <Col>
             <BookList
-              selectedBook={selectedBook}
+              selectedBook={book}
               books={books}
               selectBook={selectBook}
             />
           </Col>
           <Col>
             <BookForm
-              selectedBook={selectedBook}
-              setSelectedBook={setSelectedBook}
+              addBook={addBook}
+              updateBook={updateBook}
+              deleteBook={deleteBook}
+              deSelectBook={deSelectBook}
+              book={book}
             />
           </Col>
         </Row>

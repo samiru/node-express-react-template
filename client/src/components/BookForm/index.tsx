@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Book } from "../../types";
-import { addBook, updateBook, deleteBook } from "../../services/books";
 
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
-import Toast from "react-bootstrap/esm/Toast";
 
 import "./style.css";
 import Row from "react-bootstrap/esm/Row";
@@ -13,12 +11,15 @@ import Col from "react-bootstrap/esm/Col";
 import { ErrorMessage } from "@hookform/error-message";
 
 interface BookFormProps {
-  selectedBook?: Book;
-  setSelectedBook: (book?: Book) => void;
+  addBook: (book: Book) => void;
+  updateBook: (book: Book) => void;
+  deleteBook: (id: string) => void;
+  deSelectBook: () => void;
+  book?: Book;
 }
 
 const BookForm = (props: BookFormProps) => {
-  const { selectedBook, setSelectedBook } = props;
+  const { book, addBook, updateBook, deleteBook, deSelectBook } = props;
 
   const {
     reset,
@@ -30,40 +31,30 @@ const BookForm = (props: BookFormProps) => {
 
   // Populate the form with the book data
   useEffect(() => {
-    if (!selectedBook) return;
     reset({
-      id: selectedBook.id,
-      author: selectedBook.author,
-      title: selectedBook.title,
-      description: selectedBook.description,
+      id: book?.id || "",
+      author: book?.author || "",
+      title: book?.title || "",
+      description: book?.description || "",
     });
-  }, [selectedBook, reset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [book]);
 
   const onSubmit: SubmitHandler<Book> = (data: Book) => {
     updateBook(data);
-    clearForm();
   };
 
   const onSubmitNew: SubmitHandler<Book> = (data: Book) => {
     addBook(data);
-    clearForm();
   };
 
   const handleDelete = () => {
-    if (!selectedBook) return;
-    deleteBook(selectedBook.id);
-    clearForm();
+    if (!book) return;
+    deleteBook(book.id);
   };
 
   const clearForm = () => {
-    reset({
-      id: "",
-      author: "",
-      title: "",
-      description: "",
-    });
-
-    setSelectedBook(undefined);
+    deSelectBook();
   };
 
   return (
@@ -141,7 +132,7 @@ const BookForm = (props: BookFormProps) => {
           variant="primary"
           onClick={handleSubmit(onSubmit)}
           className="mx-1"
-          disabled={!selectedBook}
+          disabled={!book}
         >
           Save
         </Button>
@@ -156,7 +147,7 @@ const BookForm = (props: BookFormProps) => {
           variant="danger"
           onClick={handleDelete}
           className="mx-1"
-          disabled={!selectedBook}
+          disabled={!book}
         >
           Delete
         </Button>

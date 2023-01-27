@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Book } from "../../types";
 import "./style.css";
 
