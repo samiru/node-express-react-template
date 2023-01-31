@@ -1,6 +1,9 @@
 import { useEffect, useReducer } from "react";
 import BookForm from "./components/BookForm";
 import BookList from "./components/BookList";
+
+import ErrorMessage from "./components/ErrorMessage";
+
 import { Book, BooksState } from "./types";
 
 import Container from "react-bootstrap/esm/Container";
@@ -36,7 +39,7 @@ function App() {
   useEffect(() => {
     if (error) {
       const { message, requestId } = error;
-      toast.error(`${message} ${requestId ? ` (${requestId})` : ""}`);
+      toast.error(<ErrorMessage message={message} requestId={requestId} />);
     }
   }, [error]);
 
