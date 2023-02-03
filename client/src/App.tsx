@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 import booksReducer from "./reducers/booksReducer";
-import { useBookActions } from "./actions/books";
+import { useBookActions } from "./hooks/useBookActions";
 
 function App() {
   const initialState: BooksState = {
