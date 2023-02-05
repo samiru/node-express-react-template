@@ -8,13 +8,12 @@ import {
 
 const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
   switch (action.type) {
-    /*
     case BooksActionTypes.SET_BOOKS:
       return {
         ...state,
         books: action.payload as Book[],
       };
-*/
+
     case BooksActionTypes.ADD_BOOK:
       const added = action.payload as Book;
       return {

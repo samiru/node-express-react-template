@@ -3,8 +3,8 @@ import * as service from "../services/books";
 import { Book, BooksActionTypes } from "../types";
 
 const useBookActions = (dispatch: Function) => {
-  // serviceCaller is a higher order function that wraps the service calls to
-  // the Books API and handles errors too
+  // serviceCaller is a higher order function that wraps the service calls
+  // to the Books API and handles errors too
   const serviceCaller =
     (fn: Function) =>
     async (...args: any[]) => {
@@ -63,7 +63,7 @@ const useBookActions = (dispatch: Function) => {
   };
 
   const deSelectBook = () => {
-    dispatch({ type: BooksActionTypes.SELECT_BOOK, payload: undefined });
+    dispatch({ type: BooksActionTypes.DESELECT_BOOK, payload: undefined });
   };
 
   return {

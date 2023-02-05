@@ -166,4 +166,31 @@ describe("booksReducer", () => {
       })
     ).toEqual(expectedState);
   });
+
+  it("should set the books", () => {
+    const book = {
+      id: "1",
+      title: "The Hobbit",
+      description: "A book about a hobbit",
+    } as Book;
+
+    const initialState = {
+      books: [],
+      selectedBook: undefined,
+      error: undefined,
+    };
+
+    const expectedState = {
+      books: [book],
+      selectedBook: undefined,
+      error: undefined,
+    };
+
+    expect(
+      booksReducer(initialState, {
+        type: BooksActionTypes.SET_BOOKS,
+        payload: [book],
+      })
+    ).toEqual(expectedState);
+  });
 });
