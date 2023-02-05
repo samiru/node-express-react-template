@@ -3,7 +3,6 @@ export interface Book {
   title: string;
   author: string;
   description: string;
-  notes?: string;
 }
 
 export interface BooksState {

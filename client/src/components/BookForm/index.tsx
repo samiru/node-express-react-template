@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Book } from "../../types";
 
-import Button from "react-bootstrap/esm/Button";
-import Form from "react-bootstrap/esm/Form";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import "./style.css";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { ErrorMessage } from "@hookform/error-message";
 
 interface BookFormProps {

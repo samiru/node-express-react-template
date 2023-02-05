@@ -6,9 +6,9 @@ import ErrorMessage from "./components/ErrorMessage";
 
 import { Book, BooksState } from "./types";
 
-import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/esm/Row";
-import Col from "react-bootstrap/esm/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
