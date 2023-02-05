@@ -1,6 +1,6 @@
-import { useBookActions } from "../../hooks/useBookActions";
-import { Book, BooksActionTypes } from "../../types";
-import * as service from "../../services/books";
+import { useBookActions } from "../";
+import { Book, BooksActionTypes } from "../../../types";
+import * as service from "../../../services/books";
 
 describe("useBookActions", () => {
   beforeAll(() => {

@@ -1,5 +1,5 @@
-import booksReducer from "../../reducers/booksReducer";
-import { Book, BooksActionTypes } from "../../types";
+import booksReducer from "../";
+import { Book, BooksActionTypes } from "../../../types";
 
 describe("booksReducer", () => {
   it("should add the book", () => {

@@ -1,6 +1,6 @@
 import axios from "axios";
-import * as service from "../services/books";
-import { Book, BooksActionTypes } from "../types";
+import * as service from "../../services/books";
+import { Book, BooksActionTypes } from "../../types";
 
 const useBookActions = (dispatch: Function) => {
   // serviceCaller is a higher order function that wraps the service calls

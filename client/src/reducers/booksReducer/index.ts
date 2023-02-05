@@ -4,7 +4,7 @@ import {
   BooksActionTypes,
   BooksState,
   ErrorWithRequestId,
-} from "../types";
+} from "../../types";
 
 const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
   switch (action.type) {
