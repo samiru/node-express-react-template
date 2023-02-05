@@ -8,18 +8,19 @@ import {
 
 const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
   switch (action.type) {
+    /*
     case BooksActionTypes.SET_BOOKS:
       return {
         ...state,
         books: action.payload as Book[],
       };
-
+*/
     case BooksActionTypes.ADD_BOOK:
       const added = action.payload as Book;
       return {
         ...state,
         books: [...state.books, added],
-        book: undefined,
+        selectedBook: undefined,
       };
 
     case BooksActionTypes.UPDATE_BOOK:
@@ -32,7 +33,7 @@ const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
           }
           return book;
         }),
-        book: undefined,
+        selectedBook: undefined,
       };
 
     case BooksActionTypes.REMOVE_BOOK:
@@ -40,7 +41,7 @@ const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
       return {
         ...state,
         books: state.books.filter((book) => book.id !== deleted.id),
-        book: undefined,
+        selectedBook: undefined,
       };
 
     case BooksActionTypes.SET_ERROR:
@@ -52,13 +53,13 @@ const booksReducer = (state: BooksState, action: BooksAction): BooksState => {
     case BooksActionTypes.SELECT_BOOK:
       return {
         ...state,
-        book: action.payload as Book,
+        selectedBook: action.payload as Book,
       };
 
     case BooksActionTypes.DESELECT_BOOK:
       return {
         ...state,
-        book: undefined,
+        selectedBook: undefined,
       };
 
     default:

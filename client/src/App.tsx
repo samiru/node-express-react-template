@@ -20,12 +20,12 @@ import { useBookActions } from "./hooks/useBookActions";
 function App() {
   const initialState: BooksState = {
     books: Array<Book>(),
-    book: undefined,
+    selectedBook: undefined,
     error: undefined,
   };
 
   const [state, dispatch] = useReducer(booksReducer, initialState);
-  const { books, book, error } = state;
+  const { books, selectedBook: book, error } = state;
 
   const {
     fetchBooks,
