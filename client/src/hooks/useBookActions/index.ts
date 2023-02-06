@@ -35,27 +35,27 @@ const useBookActions = (dispatch: Function) => {
   const addBook = async (book: Book): Promise<void> => {
     const added = await serviceCaller(service.addBook)(book);
     if (added) {
-      dispatch({ type: "ADD_BOOK", payload: added });
+      dispatch({ type: BooksActionTypes.ADD_BOOK, payload: added });
     }
   };
 
   const updateBook = async (book: Book): Promise<void> => {
     const updated = await serviceCaller(service.updateBook)(book);
     if (updated) {
-      dispatch({ type: "UPDATE_BOOK", payload: updated });
+      dispatch({ type: BooksActionTypes.UPDATE_BOOK, payload: updated });
     }
   };
 
   const fetchBooks = async (): Promise<void> => {
     const books = await serviceCaller(service.getBooks)();
     if (books) {
-      dispatch({ type: "SET_BOOKS", payload: books });
+      dispatch({ type: BooksActionTypes.SET_BOOKS, payload: books });
     }
   };
 
   const deleteBook = async (id: string): Promise<void> => {
     await serviceCaller(service.deleteBook)(id);
-    dispatch({ type: "REMOVE_BOOK", payload: { id } });
+    dispatch({ type: BooksActionTypes.REMOVE_BOOK, payload: { id } });
   };
 
   const selectBook = (book: Book) => {
