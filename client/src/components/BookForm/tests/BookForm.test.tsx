@@ -24,30 +24,29 @@ const book = {
 };
 
 describe("BookForm", () => {
-  it("should render the form", () => {
-    render(<BookForm {...mockMethods} />);
+  each(["Author", "Title", "Description"]).it(
+    "should render the label %s",
+    (labelText) => {
+      render(<BookForm {...mockMethods} />);
+      expect(screen.getByText(labelText)).toBeInTheDocument();
+    }
+  );
 
-    expect(screen.getByText("Author")).toBeInTheDocument();
-    expect(screen.getByText("Title")).toBeInTheDocument();
-    expect(screen.getByText("Description")).toBeInTheDocument();
-  });
+  each([book.author, book.title, book.description]).it(
+    "should render the form input with value %s",
+    (inputValue) => {
+      render(<BookForm {...mockMethods} book={book} />);
+      expect(screen.getByDisplayValue(inputValue)).toBeInTheDocument();
+    }
+  );
 
-  it("should render the form with book data", () => {
-    render(<BookForm book={book} {...mockMethods} />);
-
-    expect(screen.getByDisplayValue(book.author)).toBeInTheDocument();
-    expect(screen.getByDisplayValue(book.title)).toBeInTheDocument();
-    expect(screen.getByDisplayValue(book.description)).toBeInTheDocument();
-  });
-
-  it("should render the buttons", () => {
-    render(<BookForm {...mockMethods} />);
-
-    expect(screen.getByText("Save")).toBeInTheDocument();
-    expect(screen.getByText("Save New")).toBeInTheDocument();
-    expect(screen.getByText("Delete")).toBeInTheDocument();
-    expect(screen.getByText("Clear")).toBeInTheDocument();
-  });
+  each(["Save", "Save New", "Delete", "Clear"]).it(
+    "should render the button %s",
+    (buttonText) => {
+      render(<BookForm {...mockMethods} />);
+      expect(screen.getByText(buttonText)).toBeInTheDocument();
+    }
+  );
 
   each([
     {
@@ -75,39 +74,32 @@ describe("BookForm", () => {
     }
   );
 
-  it("should call addBook when Save New is clicked", async () => {
-    render(<BookForm {...mockMethods} book={book} />);
-    const saveNewButton = screen.getByText("Save New");
-    await act(async () => {
-      saveNewButton.click();
-    });
-    expect(mockAddBook).toHaveBeenCalled();
-  });
-
-  it("should call updateBook when Save is clicked", async () => {
-    render(<BookForm {...mockMethods} book={book} />);
-    const saveButton = screen.getByText("Save");
-    await act(async () => {
-      saveButton.click();
-    });
-    expect(mockUpdateBook).toHaveBeenCalled();
-  });
-
-  it("should call deleteBook when Delete is clicked", async () => {
-    render(<BookForm {...mockMethods} book={book} />);
-    const deleteButton = screen.getByText("Delete");
-    await act(async () => {
-      deleteButton.click();
-    });
-    expect(mockDeleteBook).toHaveBeenCalled();
-  });
-
-  it("should call deSelectBook when Clear is clicked", async () => {
-    render(<BookForm {...mockMethods} book={book} />);
-    const clearButton = screen.getByText("Clear");
-    await act(async () => {
-      clearButton.click();
-    });
-    expect(mockDeSelectBook).toHaveBeenCalled();
-  });
+  each([
+    {
+      buttonText: "Save",
+      method: mockUpdateBook,
+    },
+    {
+      buttonText: "Save New",
+      method: mockAddBook,
+    },
+    {
+      buttonText: "Delete",
+      method: mockDeleteBook,
+    },
+    {
+      buttonText: "Clear",
+      method: mockDeSelectBook,
+    },
+  ]).it(
+    "should call the correct method when $buttonText is clicked",
+    async (test) => {
+      render(<BookForm {...mockMethods} book={book} />);
+      const button = screen.getByText(test.buttonText);
+      await act(async () => {
+        button.click();
+      });
+      expect(test.method).toHaveBeenCalled();
+    }
+  );
 });
