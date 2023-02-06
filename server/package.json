@@ -1,7 +1,7 @@
 {
-  "name": "buutti-fullstack-assignment",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Example solution for Buutti Fullstack Assignment",
+  "description": "Example of a Node.js Express server",
   "exports": "./dist/index.js",
   "type": "commonjs",
   "engines": {
