@@ -94,7 +94,7 @@ const BookForm = (props: BookFormProps) => {
               render={({ field }) => (
                 <Form.Control
                   {...field}
-                  {...register("title", { required: "Book title is required" })}
+                  {...register("title", { required: "Title is required" })}
                 />
               )}
             />
