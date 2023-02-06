@@ -2,7 +2,28 @@
 
 ## Description
 
-This is the client side of the application. It is a React application that uses the [Bootstrap](https://getbootstrap.com/) framework for styling.
+This is the client side of a simple application that allows users to create and manage a list of books.
+
+### UI Framework
+
+The application is a [React](https://reactjs.org/) application.
+
+### Styling
+
+The application uses the [Bootstrap](https://getbootstrap.com/) framework for styling.
+
+### State Management
+
+The application uses React Reducers to manage state. The reducers are located in the `src/reducers` directory.
+
+See more about reducers at
+
+- [React Reducers](https://reactjs.org/docs/hooks-reference.html#usereducer) and
+- [Extracting State Logic into a Reducer](https://beta.reactjs.org/learn/extracting-state-logic-into-a-reducer)
+
+### Testing
+
+The application uses [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing. The tests are located in `/tests` directories under respective modules and components.
 
 # Getting Started with Create React App
 
