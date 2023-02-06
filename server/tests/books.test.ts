@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import app from "../src/server";
+import app from "../src";
 import fs from "node:fs";
 import { join } from "node:path";
 
